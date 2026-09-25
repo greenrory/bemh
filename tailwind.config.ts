@@ -12,23 +12,22 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         serif: ["var(--font-serif)", ...fontFamily.serif],
-        heading: ["var(--font-heading)", ...fontFamily.sans],
       },
       colors: {
-        brand: {
-          25: "#F7FAFD",
-          50: "#F0F5FA",
-          100: "#E1EBF5",
-          200: "#C7D7EB",
-          300: "#A9C3DE",
-          400: "#8BAECF",
-          500: "#6D99BF",
-          600: "#5483A3",
-          700: "#426A86",
-          800: "#335269",
-          900: "#273E4F",
-          950: "#1C2D3A",
-        },
+        evergreen: "#0C5A46",
+        "evergreen-deep": "#083F31",
+        "be-green": "#00874F",
+        navy: "#0A163C",
+        mist: "#E8F2EC",
+        safety: "#B42318",
+        "safety-deep": "#861A12",
+      },
+      boxShadow: {
+        // Solid "ledge" under buttons; it collapses on press for tactile feedback.
+        ledge: "0 3px 0 0 var(--ledge-color)",
+      },
+      transitionTimingFunction: {
+        calm: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },

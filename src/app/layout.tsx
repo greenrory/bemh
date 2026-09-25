@@ -1,17 +1,20 @@
-import type { Metadata } from "next"
-import { Inter, Source_Serif_4 } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Fraunces, Inter } from "next/font/google"
+import { Footer } from "./components/Footer"
+import { Header } from "./components/Header"
 import { Providers } from "./components/providers"
+import { site } from "@/data/site"
 import { cn } from "@/utils"
 
 import "./globals.css"
 
-const inter = Inter({ 
-  subsets: ["latin"], 
+const inter = Inter({
+  subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 })
 
-const sourceSerif = Source_Serif_4({
+const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",
@@ -19,16 +22,47 @@ const sourceSerif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  title: "Bishop England Spanish Club | Habla. Conecta. Descubre.",
-  description: "A student-led community for Spanish language, culture, and real experiences at Bishop England High School. Come as you are — you only need to be curious.",
-  icons: [
-    { rel: "icon", url: "/besc.png", type: "image/png" },
-    { rel: "apple-touch-icon", url: "/besc.png" },
-  ],
+  metadataBase: new URL(site.domain),
+  title: {
+    default: site.title,
+    template: `%s | ${site.name}`,
+  },
+  description: site.description,
+  applicationName: site.name,
   openGraph: {
-    title: "Bishop England Spanish Club",
-    description: "Habla. Conecta. Descubre. Spanish is more than a class.",
-    siteName: "Bishop England Spanish Club",
+    title: site.title,
+    description: site.description,
+    url: site.domain,
+    siteName: site.name,
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+  },
+  alternates: {
+    canonical: "/",
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#FFFFFF",
+}
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.fullName,
+  alternateName: site.name,
+  url: site.domain,
+  logo: `${site.domain}/mhclogo.png`,
+  description: site.description,
+  parentOrganization: {
+    "@type": "HighSchool",
+    name: site.school,
+    url: site.schoolUrl,
   },
 }
 
@@ -38,9 +72,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable, sourceSerif.variable)}>
-      <body className="font-sans bg-[#F6F4EF] text-[#0A163C] antialiased">
-        <Providers>{children}</Providers>
+    <html lang="en" className={cn(inter.variable, fraunces.variable)}>
+      <body className="min-h-screen bg-white font-sans text-navy antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <Providers>
+          <Header />
+          <main id="main" className="pt-16 md:pt-[4.5rem]">
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   )
