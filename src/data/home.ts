@@ -50,3 +50,18 @@ export const helpPaths = [
     action: { href: "/resources#friend", label: "How to support a friend" },
   },
 ] as const
+
+export const joinInfo = {
+  meetingsLabel: "Mandatory meetings for members",
+  meetings: [
+    "September 2",
+    "October 7",
+    "November 4",
+    "December 2",
+    "January 6",
+    "February 3",
+    "March 3",
+    "April 7",
+    "May 5",
+  ],
+} as const

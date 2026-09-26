@@ -1,7 +1,6 @@
 import Image from "next/image"
 import type { Metadata } from "next"
 import {
-  ConversationCircle,
   ConvergingLines,
   HeartMark,
   PillarGlyph,
@@ -14,7 +13,7 @@ import {
   Eyebrow,
   TextLink,
 } from "./components/ui"
-import { helpPaths, pillars, values } from "@/data/home"
+import { helpPaths, joinInfo, pillars, values } from "@/data/home"
 import { leadership } from "@/data/leadership"
 import { site } from "@/data/site"
 
@@ -258,22 +257,35 @@ export default function HomePage() {
         className="bg-evergreen py-24 text-white md:py-32"
       >
         <Container>
-          <Reveal className="grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
-            <div>
-              <Eyebrow tone="inverse">Join the Club</Eyebrow>
-              <h2
-                id="join-title"
-                className="mt-5 font-serif text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl"
-              >
-                Just show up.
-              </h2>
-              <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/80">
-                There&apos;s nothing to fill out. Message Rory Green on Teams, or
-                any club officer, and we&apos;ll help you get started. Then come
-                to a meeting.
-              </p>
-            </div>
-            <ConversationCircle className="mx-auto hidden max-w-[260px] lg:block" />
+          <Reveal className="max-w-2xl">
+            <Eyebrow tone="inverse">Join the Club</Eyebrow>
+            <h2
+              id="join-title"
+              className="mt-5 font-serif text-4xl font-semibold leading-[1.1] tracking-tight md:text-5xl"
+            >
+              Just show up.
+            </h2>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/80">
+              Message Rory Green on Teams, or any club officer, if you have
+              questions—then come to a meeting.
+            </p>
+          </Reveal>
+
+          <Reveal className="mt-12">
+            <h3 className="font-serif text-2xl font-semibold md:text-3xl">
+              {joinInfo.meetingsLabel}
+            </h3>
+            <p className="mt-2 text-white/75">Lunch meetings for the year</p>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {joinInfo.meetings.map((date) => (
+                <li
+                  key={date}
+                  className="rounded-xl bg-white/10 px-5 py-4 text-[17px] font-semibold"
+                >
+                  {date}
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </Container>
       </section>
